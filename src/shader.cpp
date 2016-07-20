@@ -3,6 +3,7 @@
 
 Shader::Shader(const char *vertexShaderSource,
     const char *fragmentShaderSource) {
+
     uint32_t vs,fs;
     vs = compile(vertexShaderSource, GL_VERTEX_SHADER);
     fs = compile(fragmentShaderSource, GL_FRAGMENT_SHADER);

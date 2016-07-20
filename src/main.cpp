@@ -2,19 +2,21 @@
 #include "shader.h"
 #include "mesh.h"
 #include "texture.h"
+#include "game.h"
 
-const int WIDTH = 1280;
-const int HEIGHT = 720;
+    const int WIDTH = 1280;
+    const int HEIGHT = 720;
 
 const GLchar* vertexShaderSource = "#version 330 core\n"
     "layout (location = 0) in vec2 position;\n"
     "layout (location = 1) in vec2 uv;\n"
     "uniform float ratio;\n"
+    "uniform vec2 offset;\n"
     "out vec2 uvCoords;\n"
     "void main()\n"
     "{\n"
-    "gl_Position = vec4((position.x) / (ratio * 2) - 1, "
-    "(position.y) / 2 - 1, 0.0, 1.0);\n"
+    "gl_Position = vec4((position.x + offset.x) / (ratio * 2) - 1, "
+    "(position.y + offset.y) / 2 - 1, 0.0, 1.0);\n"
     "uvCoords = uv;\n"
     "}\0";
 const GLchar* fragmentShaderSource = "#version 330 core\n"
@@ -30,38 +32,8 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
 
 int main(int argc, char const *argv[]) {
 
-    std::vector<uint32_t> v(16);
-    std::vector<uint32_t> i(6);
-    v = {
-        0, 0, 1, 1,
-        1, 0, 0, 1,
-        0, 1, 1, 0,
-        1, 1, 0, 0 
-    };
-    i = {
-        0, 1, 2,
-        2, 1, 3 
-    };
-
-	Window window(WIDTH, HEIGHT, "RPGGame");
-
-    Mesh mesh(v, i, "tile_" + to_string(1) + "_" + to_string(1));
-    Texture texture("res/texture/ground_stone.png");
-
-    Shader shader(vertexShaderSource, fragmentShaderSource);
-    shader.addUniform("ratio");
-
-    float aspectRatio = (float) WIDTH / (float) HEIGHT;
-
-	while(!window.shouldClose()) {
-        shader.bind();
-        shader.updateUniform1f("ratio", aspectRatio);
-
-        texture.bind(GL_TEXTURE0);
-		mesh.draw();
-
-		window.render();
-	}
-
+    Game game("Hi", vertexShaderSource, fragmentShaderSource);
+    game.run();
+    
 	return 0;
 }

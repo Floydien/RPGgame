@@ -19,6 +19,8 @@ public:
     void updateUniform2f(const std::string &, float, float) const;
     void updateUniform2fv(const std::string &, int, float *) const;
 
+    inline const int getProgram() const {return program;};
+
 private:
     std::map<const std::string, int32_t> uniformMap;
     int compile(const char *, uint32_t);

@@ -1,6 +1,6 @@
 #include "window.h"
 
-Window::Window(int32_t width, int32_t height, const char *title) {
+Window::Window(int32_t width, int32_t height, const std::string &title) {
     glfwInit();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -9,7 +9,7 @@ Window::Window(int32_t width, int32_t height, const char *title) {
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 
-    this->window = glfwCreateWindow(width, height, title, NULL, NULL);
+    this->window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
     this->width = width;
     this->height = height;
     this->title = title;
@@ -34,7 +34,7 @@ Window::~Window() {
 }
 
 int Window::shouldClose() {
-    return glfwWindowShouldClose(this->window);
+    return !glfwWindowShouldClose(this->window);
 }
 
 void Window::render() {

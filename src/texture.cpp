@@ -58,5 +58,4 @@ Texture::~Texture() {
 
 void Texture::bind(uint32_t location) const {
     data->bind(location);
-
 }

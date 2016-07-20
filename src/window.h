@@ -6,7 +6,7 @@
 
 class Window {
 public:
-    Window(int32_t, int32_t, const char *);
+    Window(int32_t, int32_t, const std::string &);
     ~Window();
 
     int shouldClose();
@@ -17,5 +17,5 @@ private:
     GLFWwindow *window;
     int32_t width;
     int32_t height;
-    const char *title;
+    std::string title;
 };

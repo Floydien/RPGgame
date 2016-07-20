@@ -8,7 +8,7 @@ using namespace std;
 
 class MeshData : public ReferenceCounter {
 public:
-	MeshData(const vector<uint32_t> &, const vector<uint32_t> &);
+	MeshData(const std::vector<uint32_t> &, const std::vector<uint32_t> &);
 	~MeshData();
 
 	void draw() const;
@@ -20,15 +20,15 @@ private:
 
 class Mesh {
 public:
-	Mesh(const vector<uint32_t> &, const vector<uint32_t> &, const string &);
+	Mesh(const std::vector<uint32_t> &, const std::vector<uint32_t> &, const std::string &);
 	~Mesh();
 
     void draw() const;
 
 private:
-	const string name;
+	const std::string name;
 
     MeshData *data;
 
-    static map<const string, MeshData *> meshMap;
+    static std::map<const std::string, MeshData *> meshMap;
 };

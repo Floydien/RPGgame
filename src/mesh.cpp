@@ -1,9 +1,9 @@
 #include "mesh.h"
+#include <cstdio>
 
+std::map<const std::string, MeshData *> Mesh::meshMap;
 
-map<const string, MeshData *> Mesh::meshMap;
-
-MeshData::MeshData(const vector<uint32_t> &vertices, const vector<uint32_t> &indices) :
+MeshData::MeshData(const std::vector<uint32_t> &vertices, const std::vector<uint32_t> &indices) :
     ReferenceCounter() {
 
     glGenVertexArrays(1, &vao);
@@ -44,9 +44,9 @@ void MeshData::draw() const {
     glBindVertexArray(0);
 }
 
-Mesh::Mesh(const vector<uint32_t> &vertices, const vector<uint32_t> &indices, const string &name) :
+Mesh::Mesh(const std::vector<uint32_t> &vertices, const std::vector<uint32_t> &indices, const std::string &name) :
     name(name) {
-    map<const string, MeshData *>::iterator it = meshMap.find(name);
+    std::map<const std::string, MeshData *>::iterator it = meshMap.find(name);
     if(it != meshMap.end())
     {
         data = it->second;
@@ -55,8 +55,9 @@ Mesh::Mesh(const vector<uint32_t> &vertices, const vector<uint32_t> &indices, co
     else
     {
         data = new MeshData(vertices, indices);
-        meshMap.insert(pair<const string, MeshData *>(name, data));
+        meshMap.insert(std::pair<const string, MeshData *>(name, data));
     }
+    printf("%s\n", name.c_str());
 }
 
 Mesh::~Mesh() {
