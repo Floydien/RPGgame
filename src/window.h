@@ -4,8 +4,7 @@
 #include <stdint.h>
 #include <string>
 
-class Window
-{
+class Window {
 public:
     Window(int32_t, int32_t, const char *);
     ~Window();

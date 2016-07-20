@@ -1,7 +1,6 @@
 #include "window.h"
 
-Window::Window(int32_t width, int32_t height, const char *title)
-{
+Window::Window(int32_t width, int32_t height, const char *title) {
     glfwInit();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -30,18 +29,15 @@ Window::Window(int32_t width, int32_t height, const char *title)
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);	
 }
 
-Window::~Window()
-{
+Window::~Window() {
     glfwTerminate();
 }
 
-int Window::shouldClose()
-{
+int Window::shouldClose() {
     return glfwWindowShouldClose(this->window);
 }
 
-void Window::render()
-{
+void Window::render() {
     glfwSwapBuffers(this->window);
     glfwPollEvents();
 }

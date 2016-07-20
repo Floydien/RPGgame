@@ -4,8 +4,8 @@
 map<const string, MeshData *> Mesh::meshMap;
 
 MeshData::MeshData(const vector<uint32_t> &vertices, const vector<uint32_t> &indices) :
-    ReferenceCounter()
-{
+    ReferenceCounter() {
+
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
     glGenBuffers(1, &ebo);
@@ -32,23 +32,20 @@ MeshData::MeshData(const vector<uint32_t> &vertices, const vector<uint32_t> &ind
     glBindVertexArray(0);
 }
 
-MeshData::~MeshData()
-{
+MeshData::~MeshData() {
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
     glDeleteBuffers(1, &ebo);
 }
 
-void MeshData::draw() const
-{
+void MeshData::draw() const {
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
 Mesh::Mesh(const vector<uint32_t> &vertices, const vector<uint32_t> &indices, const string &name) :
-    name(name)
-{
+    name(name) {
     map<const string, MeshData *>::iterator it = meshMap.find(name);
     if(it != meshMap.end())
     {
@@ -62,13 +59,11 @@ Mesh::Mesh(const vector<uint32_t> &vertices, const vector<uint32_t> &indices, co
     }
 }
 
-Mesh::~Mesh()
-{
+Mesh::~Mesh() {
     if(data->removeReference())
         delete (data);
 }
 
-void Mesh::draw() const
-{
+void Mesh::draw() const {
     data->draw();
 }

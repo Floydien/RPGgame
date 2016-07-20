@@ -6,8 +6,7 @@
 
 using namespace std;
 
-class MeshData : public ReferenceCounter
-{
+class MeshData : public ReferenceCounter {
 public:
 	MeshData(const vector<uint32_t> &, const vector<uint32_t> &);
 	~MeshData();
@@ -19,8 +18,7 @@ private:
     uint32_t ebo;
 };
 
-class Mesh
-{
+class Mesh {
 public:
 	Mesh(const vector<uint32_t> &, const vector<uint32_t> &, const string &);
 	~Mesh();
