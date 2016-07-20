@@ -1,7 +1,5 @@
 #pragma once
 #include "referencecounter.h"
-#include "vec2.h"
-#include "shader.h"
 #include <vector>
 #include <GL/glew.h>
 #include <map>

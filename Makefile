@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall -I/mingw64/include -g -std=c++14 -Wall
 LDFLAGS=-L/mingw64/lib -lopengl32 -lglew32 -lglfw3
-SOURCES=main.cpp window.cpp
+SOURCES=src/main.cpp src/window.cpp src/mesh.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=hello
 

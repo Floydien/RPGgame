@@ -13,7 +13,7 @@ MeshData::MeshData(const vector<uint32_t> &vertices, const vector<uint32_t> &ind
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vec2) * vertices.size(),
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uint32_t) * vertices.size(),
             &vertices[0], GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo); 
