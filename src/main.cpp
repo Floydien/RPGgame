@@ -1,6 +1,7 @@
 #include "window.h"
 #include "shader.h"
 #include "mesh.h"
+#include "texture.h"
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
@@ -23,8 +24,7 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
     "void main()\n"
     "{\n"
     "vec4 tile = texture(textureData, uvCoords);\n"
-    "//color = tile;\n"
-    "color = vec4(1,0,0,1);\n"
+    "color = tile;\n"
     "}\n\0";
 
 
@@ -42,19 +42,22 @@ int main(int argc, char const *argv[]) {
         0, 1, 2,
         2, 1, 3 
     };
+
 	Window window(WIDTH, HEIGHT, "RPGGame");
 
     Mesh mesh(v, i, "tile_" + to_string(1) + "_" + to_string(1));
+    Texture texture("res/texture/ground_stone.png");
 
     Shader shader(vertexShaderSource, fragmentShaderSource);
     shader.addUniform("ratio");
+
     float aspectRatio = (float) WIDTH / (float) HEIGHT;
 
-
 	while(!window.shouldClose()) {
-        shader.updateUniform1f("ratio", aspectRatio);
         shader.bind();
+        shader.updateUniform1f("ratio", aspectRatio);
 
+        texture.bind(GL_TEXTURE0);
 		mesh.draw();
 
 		window.render();
